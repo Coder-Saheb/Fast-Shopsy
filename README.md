@@ -9,3 +9,5 @@ I  use any avatar images my prefer. Free avatar packs are available at:
 - https://ui-avatars.com/
 
 Recommended size: 200×200px, PNG format with transparent background.
+
+Important: I can't add my config.php file here for Security  because there is my Google client id, secret ID or API key.
