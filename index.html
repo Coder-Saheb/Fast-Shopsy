@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FAST SHOPSY — Premium Shirts & jeeans By Somagam</title>
+  <!-- Google Fonts + Font Awesome 6.5 -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+body {
+  background: #cdcccf;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  color: #111;
+}
+
+/* Custom Cursor (Desktop Only) */
+.cursor-dot,
+.cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #fcd34d;
+  box-shadow: 0 0 8px #fcd34d;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(252, 211, 77, 0.7);
+  background: rgba(252, 211, 77, 0.05);
+  backdrop-filter: blur(2px);
+  transition: width 0.2s, height 0.2s;
+}
+
+a, button, .product-card, .floating-card {
+  cursor: none;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Container */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+section {
+  padding: 80px 0;
+  position: relative;
+}
+
+h1, h2, h3, .playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Shimmer Animation */
+.shimmer {
+  background: linear-gradient(135deg, #000 0%, #2e4f41 40%, #fcd34d 70%, #57545c 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shimmerFlow 4s linear infinite;
+}
+
+@keyframes shimmerFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.navbar.scrolled {
+  background: rgba(205, 204, 207, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(120deg, #000, #2e4f41, #fcd34d);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+}
+
+.nav-links a,
+.nav-buttons a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #1e1e2a;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  color: #2e4f41;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-outline {
+  border: 1px solid #2e4f41;
+  padding: 8px 20px;
+  border-radius: 40px;
+  box-shadow: 0 4px 12px rgba(46, 79, 65, 0.3);
+  background: transparent;
+  transition: all 0.3s;
+}
+
+.btn-outline:hover {
+  background: #2e4f41;
+  color: rgb(240, 240, 240);
+  transform: scale(1.02);
+  box-shadow: 0 0 15px #fcd34d;
+}
+
+.btn-primary {
+  background: transparent;
+  color: #000000;
+  padding: 8px 24px;
+  border-radius: 40px;
+  box-shadow: 0 4px 12px rgba(46, 79, 65, 0.3);
+  transition: all 0.0s;
+  border: 1px solid #2e4f41;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px #fcd34d;
+}
+
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #cdcccf;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu a {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  text-decoration: none;
+  color: #000;
+}
+
+.close-mobile {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-badge {
+  background: rgba(46, 79, 65, 0.2);
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  backdrop-filter: blur(4px);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1.1;
+  margin: 20px 0;
+}
+
+.hero-subtitle {
+  margin: 20px 0;
+  font-size: 1.1rem;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.hero-buttons {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+}
+
+.hero-visual {
+  position: relative;
+  perspective: 1100px;
+}
+
+.statue-hero {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* Floating Cards */
+.floating-card {
+  position: absolute;
+  width: 115px;
+  background: rgba(255, 255, 240, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  animation: orbitVar 12s infinite alternate;
+}
+
+@keyframes orbitVar {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(12px) rotate(2deg); }
+}
+
+.floating-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.gold-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #fcd34d;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.product-label {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Marquee */
+.marquee {
+  background: #000;
+  color: #ffffff;
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: scrollMarquee 30s linear infinite;
+}
+
+.marquee-content span {
+  margin: 0 20px;
+  font-weight: 500;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Stats Bar */
+.stats-section {
+  padding: 60px 0;
+}
+
+.stats-bar {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.stat-item h3 {
+  font-size: 2.5rem;
+  font-family: 'Playfair Display';
+  background: linear-gradient(135deg, #2e4f41, #fcd34d);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Two Column Layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.reverse {
+  direction: rtl;
+}
+
+.reverse > * {
+  direction: ltr;
+}
+
+.statue-wrapper {
+  position: relative;
+}
+
+.statue-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.eyebrow {
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #2e4f41;
+  font-weight: 600;
+}
+
+.statue-eyebrow {
+  margin-bottom: 8px;
+}
+
+.statue-caption {
+  margin-top: 12px;
+  font-style: italic;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.glass-feature {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  padding: 16px;
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.glass-feature:hover {
+  transform: translateY(-5px);
+}
+
+.checklist {
+  list-style: none;
+  margin: 24px 0;
+}
+
+.checklist li {
+  margin: 12px 0;
+}
+
+.checklist i {
+  color: #2e4f41;
+  margin-right: 10px;
+}
+
+.inline-stats {
+  display: flex;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+/* Showcase Section */
+.showcase-section {
+  background: radial-gradient(circle at 30% 20%, #1a0c1e, #04020a);
+  padding: 80px 0;
+}
+
+.showcase-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 48px;
+}
+
+.showcase-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.statue-card {
+  width: 280px;
+  opacity: 0;
+  transform: translateX(60px) rotateY(25deg);
+  transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+  background: rgba(20, 20, 30, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 32px;
+  padding: 20px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+}
+
+.statue-card.visible {
+  opacity: 1;
+  transform: translateX(0) rotateY(0deg);
+}
+
+.statue-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin: 16px 0;
+}
+
+.showcase-eyebrow {
+  color: #fcd34d;
+  text-align: center;
+  display: block;
+}
+
+.showcase-tagline {
+  text-align: center;
+  color: #ccc;
+  margin-top: 12px;
+}
+
+/* Product Strip */
+.product-strip-section {
+  overflow-x: hidden;
+}
+
+.product-strip {
+  overflow-x: auto;
+  display: flex;
+  gap: 24px;
+  padding: 20px 0;
+  scrollbar-width: thin;
+}
+
+.product-strip-card {
+  min-width: 180px;
+  background: rgba(255, 255, 245, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 12px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.product-strip-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.product-strip-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* Testimonials */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: rgba(255, 255, 240, 0.3);
+  backdrop-filter: blur(8px);
+  padding: 28px;
+  border-radius: 32px;
+  transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+.stars {
+  color: #fcd34d;
+  margin-bottom: 16px;
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  background: #2e4f41;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: 16px;
+}
+
+/* CTA Section */
+.cta-section {
+  background: radial-gradient(circle at center, rgba(46, 79, 65, 0.2), transparent);
+  text-align: center;
+}
+
+.cta-content {
+  text-align: center;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* Product Showcase */
+.product-showcase {
+  padding: 40px 0;
+}
+
+.showcase-center {
+  text-align: center;
+}
+
+.full-showcase-img {
+  max-width: 100%;
+  border-radius: 48px;
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
+}
+
+.showcase-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Footer Styles */
+.footer {
+  background: #111;
+  color: #ccc;
+  padding: 48px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.social-icons i {
+  font-size: 24px;
+  margin: 0 8px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.social-icons i:hover {
+  color: #fcd34d;
+}
+
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(6, 0, 18, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-dialog {
+  background: #fdfdfc;
+  padding: 32px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  color: #111;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-overlay.active .modal-dialog {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #111;
+}
+
+.modal-images {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.modal-images img {
+  width: calc(50% - 8px);
+  height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+#modalTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+#modalDesc {
+  color: #555;
+  line-height: 1.5;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.modal-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 900px) {
+  .container { padding: 0 18px; }
+  .navbar { padding: 16px 18px; }
+  .nav-links, .nav-buttons { display: none; }
+  .hamburger { display: block; }
+  .hero { padding-top: 90px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-visual { width: 100%; }
+  .hero-buttons { flex-direction: column; align-items: stretch; }
+  .hero-buttons .btn-outline,
+  .hero-buttons .btn-primary { width: 100%; }
+  .hero-title { font-size: clamp(2.5rem, 8vw, 4rem); }
+  .hero-subtitle { font-size: 1rem; }
+  .floating-card { width: 110px; }
+  .floating-card img { height: 100px; }
+  .stats-bar, .feature-grid, .two-col, .showcase-grid, .testimonial-grid { grid-template-columns: 1fr; }
+  .product-strip { padding: 16px 0; }
+  .product-strip-card { min-width: 160px; }
+}
+
+@media (max-width: 600px) {
+  .navbar { padding: 14px 16px; }
+  .logo { font-size: 1.6rem; }
+  .hero-title { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .hero-badge { font-size: 0.75rem; padding: 5px 12px; }
+  .hero-buttons { gap: 12px; }
+  .hero-buttons .btn-outline,
+  .hero-buttons .btn-primary { padding: 12px 18px; }
+  .hero-tags { gap: 10px; }
+  .product-strip-card { min-width: 140px; }
+  .floating-card { width: 100px; padding: 6px; }
+  .floating-card img { height: 90px; }
+  .testimonial-card { padding: 20px; }
+}
+  </style>
+
+</head>
+<body>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <i class="fas fa-times close-mobile" onclick="closeMobileMenu()"></i>
+    <a href="#" onclick="redirectLogin()">Home</a>
+    <a href="#" onclick="redirectLogin()">Shop</a>
+    <a href="#" onclick="redirectLogin()">Collection</a>
+    <a href="#" onclick="redirectLogin()">Journal</a>
+    <a href="#" onclick="redirectLogin()">Login</a>
+    <a href="#" onclick="redirectLogin()">Register</a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="logo shimmer">FAST SHOPSY</div>
+    <div class="nav-links">
+      <a href="#" onclick="redirectLogin()">Home</a>
+      <a href="#" onclick="redirectLogin()">Shop</a>
+      <a href="#" onclick="redirectLogin()">Collection</a>
+      <a href="#" onclick="redirectLogin()">Journal</a>
+    </div>
+    <div class="nav-buttons">
+      <a href="#" class="btn-outline" onclick="redirectLogin()">Login</a>
+      <a href="#" class="btn-primary" onclick="redirectLogin()">Register</a>
+    </div>
+    <div class="hamburger" onclick="openMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div class="hero-badge">NEW DROP 2026</div>
+          <h1 class="hero-title shimmer">Sculpted in Silk & Denim</h1>
+          <p class="hero-subtitle">Premium shirts and raw selvedge — built for the boldly modern.</p>
+          <div class="hero-tags">
+            <span class="eyebrow">Timeless</span>
+            <span class="eyebrow">Eco cotton</span>
+            <span class="eyebrow">Italian craft</span>
+            <span class="eyebrow">Limited</span>
+          </div>
+          <div class="hero-buttons">
+            <button class="btn-primary" onclick="redirectLogin()">Shop Now →</button>
+            <button class="btn-outline" onclick="redirectLogin()">Explore</button>
+          </div>
+        </div>
+        <div class="hero-visual" id="heroVisual">
+          <img src="assets/statue.png" alt="hero statue" class="statue-hero" onerror="this.src='https://placehold.co/600x800?text=Statue+Image'">
+          
+          <!-- Floating Cards -->
+          <div class="floating-card" style="top:-20px; left:-20px; animation-duration:11s;">
+            <img src="assets/shirt1.png" alt="shirt1" onerror="this.src='https://placehold.co/115x110?text=shirt1'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Silk Luxe</div>
+          </div>
+          <div class="floating-card" style="top:-20px; right:-20px; animation-duration:13s;">
+            <img src="assets/shirt2.png" alt="shirt2" onerror="this.src='https://placehold.co/115x110?text=shirt2'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Linen Cloud</div>
+          </div>
+          <div class="floating-card" style="bottom:-20px; left:-20px; animation-duration:14s;">
+            <img src="assets/jeans1.png" alt="jeans1" onerror="this.src='https://placehold.co/115x110?text=jeans1'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Slim Stretch</div>
+          </div>
+          <div class="floating-card" style="bottom:-20px; right:-20px; animation-duration:12s;">
+            <img src="assets/jeans2.png" alt="jeans2" onerror="this.src='https://placehold.co/115x110?text=jeans2'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Wide Leg</div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- MARQUEE STRIP -->
+    <div class="marquee">
+      <div class="marquee-content">
+        <span><i class="fas fa-star"></i> Free shipping</span>
+        <span><i class="fas fa-tag"></i> 30% off first order</span>
+        <span><i class="fas fa-truck"></i> Express delivery</span>
+        <span><i class="fas fa-undo"></i> Easy returns</span>
+        <span><i class="fas fa-gem"></i> Premium quality</span>
+        <span><i class="fas fa-leaf"></i> Sustainable</span>
+        <span><i class="fas fa-star"></i> Free shipping</span>
+        <span><i class="fas fa-tag"></i> 30% off first order</span>
+      </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-section">
+      <div class="container">
+        <div class="stats-bar">
+          <div class="stat-item">
+            <h3>150+</h3>
+            <p>Fabrics</p>
+          </div>
+          <div class="stat-item">
+            <h3>12k</h3>
+            <p>Happy Clients</p>
+          </div>
+          <div class="stat-item">
+            <h3>45</h3>
+            <p>Flagship Stores</p>
+          </div>
+          <div class="stat-item">
+            <h3>4.98⭐</h3>
+            <p>Rating</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- INNOVATION SECTION -->
+<section class="innovation">
+  <div class="container two-col">
+    <div class="statue-wrapper">
+      <div class="eyebrow statue-eyebrow">New Arrival · Innovation</div>
+      
+      <div style="position: relative;">
+        <!-- We match the size perfectly and crop the invisible gap using object-fit and aspect-ratio -->
+        <img src="assets/statue1.png" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: bottom center; border-radius: 16px;" class="statue-img" onerror="this.src='https://placehold.co/600x750?text=statue1'">
+        
+        <div class="floating-card section-card" style="top: -18px; left: -18px;">
+          <img src="assets/shirt1.png" onerror="this.src='https://images.unsplash.com/photo-1596755094514-f87e32f6b717?w=115&h=110&fit=crop&q=80'">
+          <div class="gold-badge">★</div>
+          <div class="product-label">Oxford</div>
+        </div>
+        
+        <div class="floating-card section-card" style="bottom: -18px; right: -18px;">
+          <img src="assets/jeans1.png" onerror="this.src='https://images.unsplash.com/photo-1542272604-78021c322bfa?w=115&h=110&fit=crop&q=80'">
+          <div class="gold-badge">★</div>
+          <div class="product-label">Tapered Raw</div>
+        </div>
+      </div>
+      
+      <div class="statue-caption" style="margin-top: 12px; font-style: italic;">Where technology meets texture.</div>
+    </div>
+    
+    <div class="content-right">
+      <div class="eyebrow">Pioneer fabric</div>
+      <h2 class="playfair">Innovation Lab</h2>
+      <p>Hydrophobic organic cotton meets japanese denim. Breathe new life.</p>
+      <div class="feature-grid">
+        <div class="glass-feature"><i class="fas fa-microchip"></i> Nano-tech finish</div>
+        <div class="glass-feature"><i class="fas fa-water"></i> Stain resistant</div>
+        <div class="glass-feature"><i class="fas fa-feather-alt"></i> Ultra-light</div>
+        <div class="glass-feature"><i class="fas fa-recycle"></i> Zero waste</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- COLLECTION SECTION -->
+    <section class="collection">
+      <div class="container two-col reverse">
+        <div class="content-left">
+          <div class="eyebrow">Curated · Season 2026</div>
+          <h2 class="playfair">The Archive Edit</h2>
+          <p>Every piece earns its place. Limited quantities, timeless cuts.</p>
+          <ul class="checklist">
+            <li><i class="fas fa-check-circle"></i> Raw selvedge denim</li>
+            <li><i class="fas fa-check-circle"></i> 100% organic linen</li>
+            <li><i class="fas fa-check-circle"></i> Hand-stitched finishes</li>
+            <li><i class="fas fa-check-circle"></i> Carbon neutral</li>
+          </ul>
+          <button class="btn-primary" onclick="redirectLogin()">Browse Collection</button>
+        </div>
+        <div class="statue-wrapper">
+          <div class="eyebrow statue-eyebrow">Curated · Season 2026</div>
+          <img src="assets/statue2.png" class="statue-img" onerror="this.src='https://placehold.co/600x700?text=statue2'">
+          <div class="statue-caption">Every piece earns its place.</div>
+          <div class="floating-card section-card" style="top:-18px; left:-18px;">
+            <img src="assets/shirt4.png" onerror="this.src='https://placehold.co/100x100'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Resort Collar</div>
+          </div>
+          <div class="floating-card section-card" style="bottom:-18px; right:-18px;">
+            <img src="assets/jeans4.png" onerror="this.src='https://placehold.co/100x100'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Relaxed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOOKBOOK SECTION -->
+    <section class="lookbook">
+      <div class="container two-col">
+        <div class="statue-wrapper">
+          <div class="eyebrow statue-eyebrow">Editorial · Lookbook</div>
+          <img src="assets/statue3.png" class="statue-img" onerror="this.src='https://placehold.co/600x700?text=statue3'">
+          <div class="statue-caption">Style that speaks before you do.</div>
+          <div class="floating-card section-card" style="top:-18px; left:-18px;">
+            <img src="assets/shirt5.png" onerror="this.src='https://placehold.co/100x100'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Editorial</div>
+          </div>
+          <div class="floating-card section-card" style="bottom:-18px; right:-18px;">
+            <img src="assets/jeans5.png" onerror="this.src='https://placehold.co/100x100'">
+            <div class="gold-badge">★</div>
+            <div class="product-label">Selvedge</div>
+          </div>
+        </div>
+        <div class="content-right">
+          <div class="eyebrow">Summer Lookbook</div>
+          <h2 class="playfair">Effortless Elegance</h2>
+          <p>Inspired by mediterranean coasts and city lights.</p>
+          <div class="inline-stats">
+            <div><strong>24</strong><br>New looks</div>
+            <div><strong>12</strong><br>Hero pieces</div>
+            <div><strong>4</strong><br>Exclusive drops</div>
+          </div>
+          <button class="btn-primary" onclick="redirectLogin()">View Lookbook →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANIMATED STATUE SHOWCASE -->
+    <div class="showcase-section">
+      <div class="container">
+        <h2 class="playfair shimmer showcase-title">The Collection</h2>
+        <div class="showcase-grid" id="statueShowcaseGrid">
+          <div class="statue-card" data-animate>
+            <div class="eyebrow showcase-eyebrow">01 · Iconic Pose</div>
+            <img src="assets/statue.png" onerror="this.src='https://placehold.co/300x400?text=Statue'">
+            <div class="showcase-tagline">Crafted for the boldly modern.</div>
+          </div>
+          <div class="statue-card" data-animate>
+            <div class="eyebrow showcase-eyebrow">02 · Innovation</div>
+            <img src="assets/statue1.png" onerror="this.src='https://placehold.co/300x400'">
+            <div class="showcase-tagline">Tech meets texture.</div>
+          </div>
+          <div class="statue-card" data-animate>
+            <div class="eyebrow showcase-eyebrow">03 · Archive</div>
+            <img src="assets/statue2.png" onerror="this.src='https://placehold.co/300x400'">
+            <div class="showcase-tagline">Timeless season edit.</div>
+          </div>
+          <div class="statue-card" data-animate>
+            <div class="eyebrow showcase-eyebrow">04 · Editorial</div>
+            <img src="assets/statue3.png" onerror="this.src='https://placehold.co/300x400'">
+            <div class="showcase-tagline">Style manifesto.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT STRIP (All 10 Products) -->
+    <section class="product-strip-section">
+      <div class="container">
+        <h2 class="playfair">The Complete Edit</h2>
+        <div class="product-strip" id="productStrip"></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"Best quality denim I've ever worn. The fit is perfect."</p>
+            <h4>— Alex K.</h4>
+            <div class="avatar-circle">AK</div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"Shirts feel like silk, sustainable too. Will buy again."</p>
+            <h4>— Maria L.</h4>
+            <div class="avatar-circle">ML</div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"Fast shipping, premium packaging. Worth every penny."</p>
+            <h4>— Jordan W.</h4>
+            <div class="avatar-circle">JW</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+      <div class="container cta-content">
+        <div class="eyebrow">Limited Access</div>
+        <h2 class="playfair shimmer">Join the Movement</h2>
+        <p>First access, exclusive drops, and member-only pricing.</p>
+        <div class="cta-buttons">
+          <button class="btn-primary" onclick="redirectLogin()">Create Account</button>
+          <button class="btn-outline" onclick="redirectLogin()">Shop Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT.PNG FULL SHOWCASE -->
+    <section class="product-showcase">
+      <div class="container showcase-center">
+        <img src="assets/product.png" alt="product showcase" class="full-showcase-img" onerror="this.src='https://placehold.co/1200x600?text=Product+Showcase'">
+        <div class="eyebrow showcase-footer">Complete the look — signature style</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <!-- Left Column -->
+      <div class="footer-col">
+        <div style="font-size: 1.8rem; font-weight: 800; font-family: 'Playfair Display', serif; color: #ffffff;">FAST SHOPSY</div>
+        <p>Premium Shirts & jeeans</p>
+      </div>
+      
+      <!-- Middle Column -->
+      <div class="footer-col" style="text-align: center;">
+        <p>© 2026 — All rights reserved.</p>
+      </div>
+      
+        <!-- Right Column -->
+      <div class="footer-col social-icons" style="text-align: right;">
+        
+        <!-- Instagram Link -->
+        <a href="https://www.instagram.com/_sahebx_?igsh=MXQ0MTMzd2VoeTg0bg==" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="fab fa-instagram"></i>
+        </a>
+        
+        <!-- YouTube Link -->
+        <a href="https://youtube.com/@webmansaheb?si=nYmSu-j3CbbucOo-" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="fab fa-youtube"></i>
+        </a>
+        
+        <!-- Telegram Link -->
+        <a href="t.me/sahebxz" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="fab fa-telegram"></i>
+        </a>
+        
+        <!-- Twitter/X Link -->
+        <a href="https://x.com/SomagomS66029" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="fab fa-twitter"></i>
+        </a>
+        
+      </div>
+
+    </footer>
+
+  </main>
+
+  <!-- MODAL DIALOG -->
+  <div id="outfitModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <span class="modal-close">&times;</span>
+      <div class="modal-images" id="modalImages"></div>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <div id="modalTags" class="modal-tags"></div>
+      <button class="btn-primary modal-btn" onclick="redirectLogin()">Add to Cart →</button>
+    </div>
+  </div>
+
+  <script> 
+
+    // PRODUCT DATA
+let products = [];
+
+function fetchProducts() {
+  return fetch('api/products.php')
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success || !Array.isArray(data.products)) {
+        console.error('Unable to load products:', data);
+        return;
+      }
+      products = data.products;
+      buildProductStrip();
+    })
+    .catch(error => {
+      console.error('Product fetch error:', error);
+    });
+}
+
+// BUILD PRODUCT STRIP
+function buildProductStrip() {
+  const strip = document.getElementById('productStrip');
+  if (!strip) return;
+  
+  strip.innerHTML = '';
+  products.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'product-strip-card';
+    card.innerHTML = `
+      <img src="${product.img}" alt="${product.name}" onerror="this.src='https://placehold.co/180x200?text=${product.name}'">
+      <div style="font-weight: 600; margin-top: 10px;">${product.name}</div>
+      <div style="margin-top: 5px;">
+        <strong style="color: #2e4f41;">${product.price}</strong>
+        <span style="text-decoration: line-through; margin-left: 8px; color: #999;">${product.old}</span>
+      </div>
+    `;
+    card.onclick = (e) => {
+      e.stopPropagation();
+      openProductModal(product);
+    };
+    strip.appendChild(card);
+  });
+}
+
+// MODAL FUNCTIONS
+function openProductModal(product) {
+  const modal = document.getElementById('outfitModal');
+  const modalImages = document.getElementById('modalImages');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalTags = document.getElementById('modalTags');
+  
+  if (!modal || !modalImages) return;
+  
+  modalImages.innerHTML = `
+    <img src="${product.img}" alt="${product.name}" onerror="this.src='https://placehold.co/200x160'">
+    <img src="${product.pairImg}" alt="pair" onerror="this.src='https://placehold.co/200x160'">
+  `;
+  
+  modalTitle.textContent = product.name;
+  modalDesc.textContent = product.desc;
+  
+  modalTags.innerHTML = product.tags.map(tag => 
+    `<span class="eyebrow" style="background: #eee; padding: 4px 12px; border-radius: 40px; font-size: 12px;">${tag}</span>`
+  ).join('');
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('outfitModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+// REDIRECT TO LOGIN.PHP
+function redirectLogin() {
+  window.location.href = "login.php";
+}
+
+// MOBILE MENU FUNCTIONS
+function openMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  if (menu) menu.classList.add('open');
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  if (menu) menu.classList.remove('open');
+}
+
+// NAVBAR SCROLL EFFECT
+function handleNavbarScroll() {
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    if (window.scrollY > 20) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+}
+
+// STATUE CARDS ANIMATION WITH INTERSECTION OBSERVER
+function initStatueAnimation() {
+  const statueCards = document.querySelectorAll('.statue-card[data-animate]');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+  
+  statueCards.forEach(card => observer.observe(card));
+}
+
+// CUSTOM CURSOR (DESKTOP ONLY)
+function initCustomCursor() {
+  if (window.innerWidth > 900) {
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    
+    if (!dot || !ring) return;
+    
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
+    });
+    
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
+      ring.style.transform = `translate3d(${ringX - 17}px, ${ringY - 17}px, 0)`;
+      requestAnimationFrame(animateRing);
+    }
+    
+    animateRing();
+    
+    // Hover effect on interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .product-strip-card, .floating-card, .testimonial-card, .glass-feature');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '52px';
+        ring.style.height = '52px';
+        ring.style.border = '2px solid #fcd34d';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '34px';
+        ring.style.height = '34px';
+        ring.style.border = '1.5px solid rgba(252, 211, 77, 0.7)';
+      });
+    });
+    
+    dot.style.opacity = '1';
+    ring.style.opacity = '1';
+    document.body.style.cursor = 'none';
+  } else {
+    // Hide custom cursor on mobile
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    if (dot) dot.remove();
+    if (ring) ring.remove();
+    document.body.style.cursor = 'auto';
+  }
+}
+
+// 3D TILT EFFECT ON HERO VISUAL
+function init3DTilt() {
+  const heroVis = document.getElementById('heroVisual');
+  if (heroVis && window.innerWidth > 900) {
+    heroVis.addEventListener('mousemove', (e) => {
+      const rect = heroVis.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      heroVis.style.transform = `perspective(1100px) rotateY(${x * 8}deg) rotateX(${-y * 5}deg)`;
+    });
+    
+    heroVis.addEventListener('mouseleave', () => {
+      heroVis.style.transform = '';
+    });
+  }
+}
+
+// FLOATING CARDS DIFFERENT ANIMATION DELAYS
+function initFloatingCards() {
+  const cards = document.querySelectorAll('.floating-card');
+  cards.forEach((card, index) => {
+    const duration = 11 + (index * 0.8);
+    card.style.animationDuration = `${duration}s`;
+  });
+}
+
+// SMOOTH SCROLL FOR ANCHOR LINKS
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href !== "#" && href !== "#") {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+}
+
+// SCROLL REVEAL ANIMATION
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.two-col, .testimonial-card, .statue-card, .product-strip-section');
+  
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  revealElements.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1)';
+    revealObserver.observe(el);
+  });
+}
+
+// MODAL EVENT LISTENERS
+function initModalEvents() {
+  const modal = document.getElementById('outfitModal');
+  const closeBtn = document.querySelector('.modal-close');
+  
+  if (modal && closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
+}
+
+// PRODUCT CARD CLICK HANDLERS (for floating cards)
+function initFloatingCardClicks() {
+  const floatingCards = document.querySelectorAll('.floating-card');
+  floatingCards.forEach((card, index) => {
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!products.length) return;
+      const productIndex = index % products.length;
+      openProductModal(products[productIndex]);
+    });
+  });
+}
+
+// STATS COUNTER ANIMATION
+function initStatsCounter() {
+  const statNumbers = document.querySelectorAll('.stat-item h3');
+  
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target;
+        const text = element.innerText;
+        const numbers = text.match(/\d+/g);
+        if (numbers) {
+          const targetNum = parseInt(numbers[0]);
+          let currentNum = 0;
+          const increment = targetNum / 50;
+          const timer = setInterval(() => {
+            currentNum += increment;
+            if (currentNum >= targetNum) {
+              element.innerText = text.replace(/\d+/, targetNum);
+              clearInterval(timer);
+            } else {
+              element.innerText = text.replace(/\d+/, Math.floor(currentNum));
+            }
+          }, 30);
+        }
+        counterObserver.unobserve(element);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  statNumbers.forEach(num => counterObserver.observe(num));
+}
+
+// MARQUEE PAUSE ON HOVER
+function initMarqueePause() {
+  const marquee = document.querySelector('.marquee-content');
+  if (marquee) {
+    const marqueeContainer = document.querySelector('.marquee');
+    marqueeContainer.addEventListener('mouseenter', () => {
+      marquee.style.animationPlayState = 'paused';
+    });
+    marqueeContainer.addEventListener('mouseleave', () => {
+      marquee.style.animationPlayState = 'running';
+    });
+  }
+}
+
+// WINDOW RESIZE HANDLER
+function handleResize() {
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // Re-initialize cursor on resize
+      const dot = document.querySelector('.cursor-dot');
+      const ring = document.querySelector('.cursor-ring');
+      if (window.innerWidth > 900) {
+        if (!dot || !ring) {
+          location.reload(); // Reload to reinitialize cursor
+        }
+      }
+    }, 250);
+  });
+}
+
+// INITIALIZE EVERYTHING ON PAGE LOAD
+document.addEventListener('DOMContentLoaded', () => {
+  fetchProducts();
+  initStatueAnimation();
+  initCustomCursor();
+  init3DTilt();
+  initFloatingCards();
+  initSmoothScroll();
+  initScrollReveal();
+  initModalEvents();
+  initFloatingCardClicks();
+  initStatsCounter();
+  initMarqueePause();
+  handleResize();
+  
+  // Navbar scroll listener
+  window.addEventListener('scroll', handleNavbarScroll);
+  
+  // Make functions global for HTML onclick
+  window.redirectLogin = redirectLogin;
+  window.openMobileMenu = openMobileMenu;
+  window.closeMobileMenu = closeMobileMenu;
+  window.openProductModal = openProductModal;
+  window.closeModal = closeModal;
+});
+
+// PRELOAD IMAGES FOR BETTER PERFORMANCE
+function preloadImages() {
+  const imageUrls = [
+    'assets/statue.png', 'assets/statue1.png', 'assets/statue2.png', 'assets/statue3.png',
+    'assets/shirt1.png', 'assets/shirt2.png', 'assets/shirt3.png', 'assets/shirt4.png', 'assets/shirt5.png',
+    'assets/jeans1.png', 'assets/jeans2.png', 'assets/jeans3.png', 'assets/jeans4.png', 'assets/jeans5.png',
+    'assets/product.png'
+  ];
+  
+  imageUrls.forEach(url => {
+    const img = new Image();
+    img.src = url;
+  });
+}
+
+// Preload images after page load
+window.addEventListener('load', preloadImages);
+
+// Add 3D tilt to feature cards on desktop
+function initFeatureCardTilt() {
+  if (window.innerWidth > 900) {
+    const featureCards = document.querySelectorAll('.glass-feature, .testimonial-card');
+    featureCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(500px) rotateX(${y * 5}deg) rotateY(${x * 5}deg) translateY(-5px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+}
+
+// Initialize feature card tilt after DOM load
+document.addEventListener('DOMContentLoaded', initFeatureCardTilt);
+</script>
+</body>
+</html>
